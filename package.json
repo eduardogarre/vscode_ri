@@ -1,7 +1,7 @@
 {
     "name": "ri",
     "displayName": "RI",
-    "description": "Soporte para el lenguaje RI",
+    "description": "Soporte para RI, el lenguaje de Representación Intermedia",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.56.0"
@@ -12,7 +12,7 @@
     "contributes": {
         "languages": [{
             "id": "ri",
-            "aliases": ["RI", "ri", "Lenguaje RI", "Representación Intermedia"],
+            "aliases": ["RI", "ri", "Representación Intermedia"],
             "extensions": [".ri",".RI"],
             "configuration": "./language-configuration.json"
         }],
