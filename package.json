@@ -1,0 +1,25 @@
+{
+    "name": "ri",
+    "displayName": "RI",
+    "description": "Soporte para el lenguaje RI",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.56.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "ri",
+            "aliases": ["RI", "ri", "Lenguaje RI", "Representación Intermedia"],
+            "extensions": [".ri",".RI"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "ri",
+            "scopeName": "source.ri",
+            "path": "./syntaxes/ri.plist"
+        }]
+    }
+}

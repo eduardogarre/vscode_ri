@@ -1,0 +1,104 @@
+# Creado usando IRO https://eeyo.io/iro/
+
+name                   = ri
+file_extensions []     = ri;
+
+styles [] {
+   .comentario             : style color = "grey"           textmate_scope = "comment";
+   .tipo                   : style color = "light_blue"     textmate_scope = "storage.type";
+   .función                : style color = "light_yellow"   textmate_scope = "entity.name.function";
+   .registro               : style color = "light_green"    textmate_scope = "variable";
+   .variable               : style color = "light_green"    textmate_scope = "variable";
+   .identificador          : style color = "light_green"    textmate_scope = "variable";
+   .texto                  : style color = "brown"          textmate_scope = "string";
+   .carácter               : style color = "blue"           textmate_scope = "constant.character";
+   .reservada_numérica     : style color = "blue"           textmate_scope = "constant.language";
+   .reservada              : style color = "blue"           textmate_scope = "keyword.control";
+   .control                : style color = "blue"           textmate_scope = "keyword.control";
+   .operador               : style color = "blue"           textmate_scope = "keyword.operator";
+   .número                 : style color = "red"            textmate_scope = "constant.numeric";
+   .etiqueta               : style color = "red"            textmate_scope = "entity.name.tag";
+}
+
+contexts [] {
+   main : context {
+      : pattern {
+         regex          \= (//.*)
+         styles[]        = .comentario;
+      }
+      : pattern {
+         regex          \= ([-0-9][0-9]*[.]*[0-9]*[eE][-0-9][0-9]*)
+         styles[]        = .número;
+      }
+      : pattern {
+         regex          \= ([-0-9][0-9]*[.]*[0-9]*)
+         styles[]        = .número;
+      }
+      : pattern {
+         regex          \= ([-0-9][0-9]*)
+         styles[]        = .número;
+      }
+      : pattern {
+         regex          \= (ret)|(sum)|(res)|(mul)|(div)|(cmp)|(slt)|(phi)|(conv)|(llama)|(rsrva)|(leeval)|(ponval)|(lee)|(guarda)
+         styles[]        = .control;
+      }
+      : pattern {
+         regex          \= (ig)|(dsig)|(ma)|(me)|(maig)|(meig)|(y)|(o)|(no)|(oex)|(x)|(a)
+         styles[]        = .operador;
+      }
+      : pattern {
+         regex          \= (módulo)|(define)|(declara)|(tipo)|(global)|(local)
+         styles[]        = .reservada;
+      }
+      : pattern {
+         regex          \= (cierto)|(falso)
+         styles[]        = .reservada_numérica;
+      }
+      : pattern {
+         regex          \= (nada)|(ent)|(nat)|(real)|(bool)|(n[0-9]*)|(e[0-9]*)|(r[0-9]*)
+         styles[]        = .tipo;
+      }
+      : pattern {
+         regex          \= ([@%][#]?[_a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜâêîôûÂÊÎÔÛãõñÃÕÑçÇ][_0-9a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜâêîôûÂÊÎÔÛãõñÃÕÑçÇ]*\()
+         styles[]        = .función;
+      }
+      : pattern {
+         regex          \= (%[0-9][0-9]*)
+         styles[]        = .registro;
+      }
+      : pattern {
+         regex          \= ([@%][_a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜâêîôûÂÊÎÔÛãõñÃÕÑçÇ][_0-9a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜâêîôûÂÊÎÔÛãõñÃÕÑçÇ]*)
+         styles[]        = .variable;
+      }
+      : pattern {
+         regex          \= (:[_a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜâêîôûÂÊÎÔÛãõñÃÕÑçÇ][_0-9a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜâêîôûÂÊÎÔÛãõñÃÕÑçÇ]*)
+         styles[]        = .etiqueta;
+      }
+      : pattern {
+         regex          \= ([_a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜâêîôûÂÊÎÔÛãõñÃÕÑçÇ][_0-9a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜâêîôûÂÊÎÔÛãõñÃÕÑçÇ]*:)
+         styles[]        = .etiqueta;
+      }
+      : pattern {
+         regex          \= ([_a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜâêîôûÂÊÎÔÛãõñÃÕÑçÇ][_0-9a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜâêîôûÂÊÎÔÛãõñÃÕÑçÇ]*)
+         styles[]        = .variable;
+      }
+      : inline_push {
+         regex          \= (\")
+         styles[]        = .texto;
+         default_style   = .texto
+         : pop {
+            regex       \= (\")
+            styles[]     = .texto;
+         }
+      }
+      : inline_push {
+         regex          \= (\')
+         styles[]        = .carácter;
+         default_style   = .carácter
+         : pop {
+            regex       \= (\')
+            styles[]     = .carácter;
+         }
+      }
+   }
+}
